@@ -1,0 +1,129 @@
+<resources>
+  <string name="app_name">Totpy</string>
+
+  <string name="token_otp_masked">******</string>
+  <string name="token_issuer">Unknown</string>
+  <string name="token_account">Unknown</string>
+  <string name="token_category_label">Category:</string>
+
+  <string name="select_all_label">Select All</string>
+  <string name="search_field_hint">Search by category, account or issuer</string>
+
+  <string name="menu_button_search_label">Search</string>
+  <string name="menu_button_scan_qr_code_label">Scan QR Code</string>
+  <string name="menu_button_add_token_label">Add Token</string>
+  <string name="menu_button_import_label">Import</string>
+  <string name="menu_button_export_label">Export</string>
+  <string name="menu_button_delete_label">Delete</string>
+  <string name="menu_button_show_public_key_label">Show Public Key</string>
+  <string name="menu_button_setup_remote_wipe_label">Setup Remote Wipe</string>
+  <string name="menu_button_show_token_category_label">Show Token Category</string>
+  <string name="menu_button_security_info">Security Details</string>
+  <string name="menu_button_about_label">About</string>
+  <string name="menu_button_logout_label">Logout</string>
+
+  <string name="login_prompt_title">TOTPY</string>
+  <string name="login_prompt_subtitle">Login</string>
+  <string name="login_prompt_message">Authenticate to continue</string>
+
+  <string name="activity_login_progress_text_view_message">Initializing mobile authenticator…</string>
+  <string name="activity_login_error_message_enable_screen_lock">Enable screen lock to use the app!</string>
+  <string name="activity_login_error_message_security_update_required">Security update required!</string>
+  <string name="activity_login_error_message_device_not_supported">Device not supported!</string>
+
+  <string name="activity_add_edit_token_issuer_field_label">Issuer:</string>
+  <string name="activity_add_edit_token_issuer_field_hint">Issuer</string>
+  <string name="activity_add_edit_token_account_field_label">Account:</string>
+  <string name="activity_add_edit_token_account_field_hint">Account</string>
+  <string name="activity_add_edit_token_category_field_label">Category:</string>
+  <string name="activity_add_edit_token_algorithm_field_label">Algorithm:</string>
+  <string-array name="activity_add_edit_token_algorithm_field_values">
+    <item>SHA1</item>
+    <item>SHA256</item>
+    <item>SHA512</item>
+  </string-array>
+  <string name="activity_add_edit_token_digits_field_label">Digits:</string>
+  <string-array name="activity_add_edit_token_digits_field_values">
+    <item>6</item>
+    <item>8</item>
+    <item>10</item>
+  </string-array>
+  <string name="activity_add_edit_token_period_field_label">Period (s):</string>
+  <string-array name="activity_add_edit_token_period_field_values">
+    <item>30</item>
+    <item>60</item>
+    <item>90</item>
+    <item>120</item>
+  </string-array>
+  <string name="activity_add_edit_token_secret_field_label">Secret:</string>
+  <string name="activity_add_edit_token_secret_field_hint">Secret</string>
+  <string name="activity_add_edit_token_scan_qr_code_button_label">Scan QR code</string>
+  <string name="activity_add_edit_token_load_otpauth_uri_button_label">Load token from OTPAuth URI</string>
+  <string name="activity_add_edit_token_cancel_button_text">Cancel</string>
+  <string name="activity_add_edit_token_approve_button_text">Save</string>
+
+  <string name="activity_export_tokens_protect_with_public_key_label">Protect with public key</string>
+  <string name="activity_export_tokens_protect_with_public_key_description">Use to migrate tokens to a 2\'nd authenticator. Requires a scan or upload of the public key from a second device.</string>
+  <string name="activity_export_tokens_protect_with_password_label">Protect with password</string>
+  <string name="activity_export_tokens_protect_with_password_description">Use to create a password-protected backup</string>
+
+  <string name="activity_setup_remote_wipe_title">Setup remote wipe</string>
+  <string name="activity_setup_remote_wipe_subtitle">Add additional protection in case a device gets stolen!</string>
+  <string name="activity_setup_remote_wipe_description">The application will securely delete stored tokens in case an SMS message containing the specified keyphrase is found in incoming messages.</string>
+  <string name="activity_setup_remote_wipe_keyphrase_hint">KEYPHRASE</string>
+  <string name="activity_setup_remote_wipe_sms_switch_label">Remote wipe on SMS message</string>
+  <string name="activity_setup_remote_wipe_cancel_button_text">Cancel</string>
+  <string name="activity_setup_remote_wipe_approve_button_text">Ok</string>
+
+  <string name="security_details_dialog_device_rooted_positive">Device ROOTED</string>
+  <string name="security_details_dialog_device_rooted_negative">Device NOT ROOTED</string>
+
+  <string name="security_details_dialog_hardware_keystore_used">Tokens protected using hardware keystore (%1$s)</string>
+  <string name="security_details_dialog_software_keystore_used">Tokens protected using software keystore</string>
+
+  <string name="security_details_dialog_token_encryption_algorithm_label">Token encryption algorithm:</string>
+  <string name="security_details_dialog_token_encryption_algorithm_rsa">RSA/OAEPwithSHA-256andMGF1Padding</string>
+  <string name="security_details_dialog_token_encryption_algorithm_ecies">ECIES (secp256r1 curve)</string>
+
+  <string name="security_details_dialog_last_export_label">Last token export performed on:</string>
+
+  <string name="security_details_dialog_device_remote_wipe_positive">Remote wipe: ON</string>
+  <string name="security_details_dialog_device_remote_wipe_negative">Remote wipe: OFF</string>
+
+  <string name="about_dialog_title_and_version">Totpy v1.0.0</string>
+  <string name="about_dialog_license">Licenced under MIT license</string>
+  <string name="about_dialog_developed_by">Developed by Filip Blažeković</string>
+  <string name="about_dialog_source_code_label">Source code available at:</string>
+  <string name="about_dialog_source_code_url">https://github.com/FilipBlazekovic/totpy-mobile-authenticator</string>
+
+  <string name="dialog_enter_otpauth_uri_entered_uri_hint">Enter OTPAuth URI</string>
+  <string name="dialog_enter_otpauth_uri_cancel_button_text">Cancel</string>
+  <string name="dialog_enter_otpauth_uri_approve_button_text">Ok</string>
+
+  <string name="password_input_dialog_enter_password_hint">Enter password</string>
+  <string name="password_input_dialog_cancel_button_text">Cancel</string>
+  <string name="password_input_dialog_approve_button_text">Ok</string>
+
+  <string name="password_define_dialog_enter_password_hint">Enter password</string>
+  <string name="password_define_dialog_confirm_password_hint">Confirm password</string>
+  <string name="password_define_dialog_cancel_button_text">Cancel</string>
+  <string name="password_define_dialog_approve_button_text">Ok</string>
+
+  <string name="progress_dialog_message">Processing…</string>
+
+  <string name="error_message_internal_error">Something went wrong!</string>
+  <string name="error_message_invalid_token_uri_format">Invalid Token URI format!</string>
+  <string name="error_message_mandatory_parameter_empty">Mandatory parameter empty:</string>
+  <string name="error_message_passwords_do_not_match">Entered passwords do not match!</string>
+  <string name="error_message_weak_password">Entered password not strong enough!</string>
+
+  <string name="remote_wipe_service_notification_title">Totpy</string>
+  <string name="remote_wipe_service_notification_message">Remote wipe service started</string>
+
+
+
+
+
+
+</resources>
+

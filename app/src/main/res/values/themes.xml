@@ -1,0 +1,66 @@
+<resources>
+  <style name="TotpyTheme" parent="Theme.Material3.Light.NoActionBar">
+    <item name="colorPrimary">@color/day_theme_primary</item>
+    <item name="colorOnPrimary">@color/day_theme_onPrimary</item>
+    <item name="colorPrimaryContainer">@color/day_theme_primaryContainer</item>
+    <item name="colorOnPrimaryContainer">@color/day_theme_onPrimaryContainer</item>
+    <item name="colorSecondary">@color/day_theme_secondary</item>
+    <item name="colorOnSecondary">@color/day_theme_onSecondary</item>
+    <item name="colorSecondaryContainer">@color/day_theme_secondaryContainer</item>
+    <item name="colorOnSecondaryContainer">@color/day_theme_onSecondaryContainer</item>
+    <item name="colorTertiary">@color/day_theme_tertiary</item>
+    <item name="colorOnTertiary">@color/day_theme_onTertiary</item>
+    <item name="colorTertiaryContainer">@color/day_theme_tertiaryContainer</item>
+    <item name="colorOnTertiaryContainer">@color/day_theme_onTertiaryContainer</item>
+    <item name="colorError">@color/day_theme_error</item>
+    <item name="colorOnError">@color/day_theme_onError</item>
+    <item name="colorErrorContainer">@color/day_theme_errorContainer</item>
+    <item name="colorOnErrorContainer">@color/day_theme_onErrorContainer</item>
+    <item name="android:colorBackground">@color/day_theme_background</item>
+    <item name="colorOnBackground">@color/day_theme_onBackground</item>
+    <item name="colorSurface">@color/day_theme_surface</item>
+    <item name="colorOnSurface">@color/day_theme_onSurface</item>
+    <item name="colorSurfaceVariant">@color/day_theme_surfaceVariant</item>
+    <item name="colorOnSurfaceVariant">@color/day_theme_onSurfaceVariant</item>
+    <item name="colorOutline">@color/day_theme_outline</item>
+    <item name="colorOutlineVariant">@color/day_theme_outlineVariant</item>
+    <item name="colorSurfaceInverse">@color/day_theme_inverseSurface</item>
+    <item name="colorOnSurfaceInverse">@color/day_theme_inverseOnSurface</item>
+    <item name="colorPrimaryInverse">@color/day_theme_inversePrimary</item>
+    <item name="colorPrimaryFixed">@color/day_theme_primaryFixed</item>
+    <item name="colorOnPrimaryFixed">@color/day_theme_onPrimaryFixed</item>
+    <item name="colorPrimaryFixedDim">@color/day_theme_primaryFixedDim</item>
+    <item name="colorOnPrimaryFixedVariant">@color/day_theme_onPrimaryFixedVariant</item>
+    <item name="colorSecondaryFixed">@color/day_theme_secondaryFixed</item>
+    <item name="colorOnSecondaryFixed">@color/day_theme_onSecondaryFixed</item>
+    <item name="colorSecondaryFixedDim">@color/day_theme_secondaryFixedDim</item>
+    <item name="colorOnSecondaryFixedVariant">@color/day_theme_onSecondaryFixedVariant</item>
+    <item name="colorTertiaryFixed">@color/day_theme_tertiaryFixed</item>
+    <item name="colorOnTertiaryFixed">@color/day_theme_onTertiaryFixed</item>
+    <item name="colorTertiaryFixedDim">@color/day_theme_tertiaryFixedDim</item>
+    <item name="colorOnTertiaryFixedVariant">@color/day_theme_onTertiaryFixedVariant</item>
+    <item name="colorSurfaceDim">@color/day_theme_surfaceDim</item>
+    <item name="colorSurfaceBright">@color/day_theme_surfaceBright</item>
+    <item name="colorSurfaceContainerLowest">@color/day_theme_surfaceContainerLowest</item>
+    <item name="colorSurfaceContainerLow">@color/day_theme_surfaceContainerLow</item>
+    <item name="colorSurfaceContainer">@color/day_theme_surfaceContainer</item>
+    <item name="colorSurfaceContainerHigh">@color/day_theme_surfaceContainerHigh</item>
+    <item name="colorSurfaceContainerHighest">@color/day_theme_surfaceContainerHighest</item>
+  </style>
+
+  <style name="TotpyDialogTheme" parent="TotpyTheme">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">false</item>
+    <item name="android:windowIsFloating">false</item>
+  </style>
+
+  <style name="Widget.App.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+    <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
+    <item name="trackThickness">20dp</item>
+  </style>
+
+  <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
+    <item name="colorPrimary">@color/day_theme_primary</item>
+  </style>
+
+</resources>

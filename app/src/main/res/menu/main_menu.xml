@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item
+    android:id="@+id/menu_button_search"
+    android:title="@string/menu_button_search_label"
+    android:icon="@drawable/core_icon_search"
+    app:showAsAction="ifRoom"/>
+
+  <item
+    android:id="@+id/menu_button_add_token"
+    android:title="@string/menu_button_add_token_label"
+    android:icon="@drawable/core_icon_add"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_import"
+    android:title="@string/menu_button_import_label"
+    android:icon="@drawable/core_icon_file_open"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_export"
+    android:title="@string/menu_button_export_label"
+    android:icon="@drawable/core_icon_file_save"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_delete"
+    android:title="@string/menu_button_delete_label"
+    android:icon="@drawable/core_icon_delete"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_show_public_key"
+    android:title="@string/menu_button_show_public_key_label"
+    android:icon="@drawable/core_icon_key"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_setup_remote_wipe"
+    android:title="@string/menu_button_setup_remote_wipe_label"
+    android:icon="@drawable/core_icon_sms"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_show_token_category"
+    android:checkable="true"
+    android:title="@string/menu_button_show_token_category_label"
+    android:icon="@drawable/core_icon_category"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_security_info"
+    android:title="@string/menu_button_security_info"
+    android:icon="@drawable/core_icon_info"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_about"
+    android:title="@string/menu_button_about_label"
+    android:icon="@drawable/core_icon_info"
+    app:showAsAction="never|withText"/>
+
+  <item
+    android:id="@+id/menu_button_logout"
+    android:title="@string/menu_button_logout_label"
+    android:icon="@drawable/core_icon_power"
+    app:showAsAction="never|withText"/>
+
+</menu>

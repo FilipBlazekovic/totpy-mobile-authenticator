@@ -1,0 +1,52 @@
+[versions]
+agp = "8.4.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.11.0"
+activity = "1.9.0"
+fragment = "1.6.2"
+constraintLayout = "2.1.4"
+recyclerView = "1.3.2"
+retrofit = "2.9.0"
+jacksonDatatype = "2.13.2"
+apacheCommonsCodec = "1.16.0"
+googleGuava = "32.1.3-jre"
+googleTink = "1.8.0"
+rootBeer = "0.0.8"
+biometric = "1.1.0"
+xzing = "4.3.0"
+room = "2.6.1"
+lombok = "1.18.32"
+
+[libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
+constraintLayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintLayout" }
+recyclerView = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerView" }
+
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofitJacksonConverter= { group = "com.squareup.retrofit2", name = "converter-jackson", version.ref = "retrofit" }
+jacksonDatatype = { group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version.ref = "jacksonDatatype" }
+
+apacheCommonsCodec = { group = "commons-codec", name = "commons-codec", version.ref = "apacheCommonsCodec" }
+googleGuava = { group = "com.google.guava", name = "guava", version.ref = "googleGuava" }
+googleTink = { group = "com.google.crypto.tink", name = "tink-android", version.ref = "googleTink" }
+rootBeer = { group = "com.scottyab", name = "rootbeer-lib", version.ref = "rootBeer" }
+biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }
+xzing = { group = "com.journeyapps", name = "zxing-android-embedded", version.ref = "xzing" }
+
+roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+
+lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+

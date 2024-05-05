@@ -1,0 +1,66 @@
+<resources>
+  <style name="TotpyTheme" parent="Theme.Material3.Dark.NoActionBar">
+    <item name="colorPrimary">@color/night_theme_primary</item>
+    <item name="colorOnPrimary">@color/night_theme_onPrimary</item>
+    <item name="colorPrimaryContainer">@color/night_theme_primaryContainer</item>
+    <item name="colorOnPrimaryContainer">@color/night_theme_onPrimaryContainer</item>
+    <item name="colorSecondary">@color/night_theme_secondary</item>
+    <item name="colorOnSecondary">@color/night_theme_onSecondary</item>
+    <item name="colorSecondaryContainer">@color/night_theme_secondaryContainer</item>
+    <item name="colorOnSecondaryContainer">@color/night_theme_onSecondaryContainer</item>
+    <item name="colorTertiary">@color/night_theme_tertiary</item>
+    <item name="colorOnTertiary">@color/night_theme_onTertiary</item>
+    <item name="colorTertiaryContainer">@color/night_theme_tertiaryContainer</item>
+    <item name="colorOnTertiaryContainer">@color/night_theme_onTertiaryContainer</item>
+    <item name="colorError">@color/night_theme_error</item>
+    <item name="colorOnError">@color/night_theme_onError</item>
+    <item name="colorErrorContainer">@color/night_theme_errorContainer</item>
+    <item name="colorOnErrorContainer">@color/night_theme_onErrorContainer</item>
+    <item name="android:colorBackground">@color/night_theme_background</item>
+    <item name="colorOnBackground">@color/night_theme_onBackground</item>
+    <item name="colorSurface">@color/night_theme_surface</item>
+    <item name="colorOnSurface">@color/night_theme_onSurface</item>
+    <item name="colorSurfaceVariant">@color/night_theme_surfaceVariant</item>
+    <item name="colorOnSurfaceVariant">@color/night_theme_onSurfaceVariant</item>
+    <item name="colorOutline">@color/night_theme_outline</item>
+    <item name="colorOutlineVariant">@color/night_theme_outlineVariant</item>
+    <item name="colorSurfaceInverse">@color/night_theme_inverseSurface</item>
+    <item name="colorOnSurfaceInverse">@color/night_theme_inverseOnSurface</item>
+    <item name="colorPrimaryInverse">@color/night_theme_inversePrimary</item>
+    <item name="colorPrimaryFixed">@color/night_theme_primaryFixed</item>
+    <item name="colorOnPrimaryFixed">@color/night_theme_onPrimaryFixed</item>
+    <item name="colorPrimaryFixedDim">@color/night_theme_primaryFixedDim</item>
+    <item name="colorOnPrimaryFixedVariant">@color/night_theme_onPrimaryFixedVariant</item>
+    <item name="colorSecondaryFixed">@color/night_theme_secondaryFixed</item>
+    <item name="colorOnSecondaryFixed">@color/night_theme_onSecondaryFixed</item>
+    <item name="colorSecondaryFixedDim">@color/night_theme_secondaryFixedDim</item>
+    <item name="colorOnSecondaryFixedVariant">@color/night_theme_onSecondaryFixedVariant</item>
+    <item name="colorTertiaryFixed">@color/night_theme_tertiaryFixed</item>
+    <item name="colorOnTertiaryFixed">@color/night_theme_onTertiaryFixed</item>
+    <item name="colorTertiaryFixedDim">@color/night_theme_tertiaryFixedDim</item>
+    <item name="colorOnTertiaryFixedVariant">@color/night_theme_onTertiaryFixedVariant</item>
+    <item name="colorSurfaceDim">@color/night_theme_surfaceDim</item>
+    <item name="colorSurfaceBright">@color/night_theme_surfaceBright</item>
+    <item name="colorSurfaceContainerLowest">@color/night_theme_surfaceContainerLowest</item>
+    <item name="colorSurfaceContainerLow">@color/night_theme_surfaceContainerLow</item>
+    <item name="colorSurfaceContainer">@color/night_theme_surfaceContainer</item>
+    <item name="colorSurfaceContainerHigh">@color/night_theme_surfaceContainerHigh</item>
+    <item name="colorSurfaceContainerHighest">@color/night_theme_surfaceContainerHighest</item>
+  </style>
+
+  <style name="TotpyDialogTheme" parent="TotpyTheme">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowFullscreen">false</item>
+    <item name="android:windowIsFloating">false</item>
+  </style>
+
+  <style name="Widget.App.CircularProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+    <item name="materialThemeOverlay">@style/ThemeOverlay.App.CircularProgressIndicator</item>
+    <item name="trackThickness">20dp</item>
+  </style>
+
+  <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
+    <item name="colorPrimary">@color/night_theme_primary</item>
+  </style>
+
+</resources>

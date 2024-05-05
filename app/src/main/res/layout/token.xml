@@ -1,0 +1,169 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="5dp"
+  android:padding="10dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/token_category_layout"
+    android:visibility="gone"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/token_layout"
+    android:layout_marginBottom="5dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:background="?colorPrimary">
+
+    <com.google.android.material.textview.MaterialTextView
+      android:id="@+id/token_category_label"
+      android:text="@string/token_category_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:textColor="@color/category_text"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:textAlignment="center" />
+
+    <com.google.android.material.textview.MaterialTextView
+      android:id="@+id/token_category_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      android:textColor="@color/category_text"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:textAlignment="center" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <LinearLayout
+    android:id="@+id/token_layout"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <CheckBox
+      android:id="@+id/token_selected_checkbox"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"/>
+
+    <ImageView
+      android:id="@+id/token_issuer_image"
+      android:src="@drawable/issuer_icon_unknown"
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:padding="5dp"
+      android:background="@drawable/element_border"/>
+
+    <LinearLayout
+      android:id="@+id/token_data_layout"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:layout_weight="1">
+
+      <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <com.google.android.material.textview.MaterialTextView
+          android:id="@+id/token_otp"
+          android:text="@string/token_otp_masked"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="15dp"
+          android:textStyle="bold"
+          android:textAlignment="center"
+          android:textSize="30sp" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+          android:id="@+id/token_remaining_time"
+          android:max="30"
+          android:progress="30"
+          app:indicatorDirectionCircular="counterclockwise"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          style="@style/Widget.App.CircularProgressIndicator"/>
+
+      </LinearLayout>
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/token_account"
+        android:text="@string/token_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="15sp" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/token_issuer_name"
+        android:text="@string/token_issuer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="normal"
+        android:textAlignment="center"
+        android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/token_buttons_layout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:orientation="vertical">
+
+      <ImageButton
+        android:id="@+id/token_copy_to_clipboard_button"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/core_icon_content_copy" />
+
+      <ImageButton
+        android:id="@+id/token_show_qr_code_button"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/core_icon_qr_code_show" />
+
+      <ImageButton
+        android:id="@+id/token_edit_button"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/core_icon_edit" />
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

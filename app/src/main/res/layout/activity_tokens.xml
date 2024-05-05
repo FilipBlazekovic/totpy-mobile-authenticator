@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".activity.TokensActivity">
+
+  <com.google.android.material.appbar.MaterialToolbar
+    android:id="@+id/toolbar"
+    app:titleCentered="true"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+
+  <androidx.fragment.app.FragmentContainerView
+    android:id="@+id/search_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/tokens_view"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+
+  <androidx.fragment.app.FragmentContainerView
+    android:id="@+id/actions_panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+</LinearLayout>

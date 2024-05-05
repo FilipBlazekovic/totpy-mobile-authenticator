@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:padding="20dp"
+  android:gravity="center"
+  android:orientation="vertical">
+
+  <TextView
+    android:textStyle="bold"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:layout_gravity="center"
+    android:text="@string/activity_setup_remote_wipe_title"
+    android:textAlignment="center"
+    android:textAllCaps="true"
+    android:textSize="20sp" />
+
+  <TextView
+    android:textStyle="normal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_gravity="center"
+    android:text="@string/activity_setup_remote_wipe_subtitle"
+    android:textAlignment="center"
+    android:textSize="15sp" />
+
+  <TextView
+    android:textStyle="normal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp"
+    android:layout_gravity="center"
+    android:justificationMode="inter_word"
+    android:text="@string/activity_setup_remote_wipe_description"
+    android:textAlignment="center"
+    android:textSize="12sp" />
+
+  <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/activity_setup_remote_wipe_keyphrase_field"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/activity_setup_remote_wipe_keyphrase_hint">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:inputType="text" />
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <GridLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:columnCount="2"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:rowCount="1">
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+      android:id="@+id/activity_setup_remote_wipe_sms_on_switch"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center|left" />
+
+    <TextView
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center|left"
+      android:paddingLeft="10dp"
+      android:text="@string/activity_setup_remote_wipe_sms_switch_label"
+      android:textAlignment="center"
+      android:textSize="15sp" />
+
+  </GridLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <Button
+      android:id="@+id/activity_setup_remote_wipe_cancel_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAllCaps="true"
+      android:text="@string/activity_setup_remote_wipe_cancel_button_text" />
+
+    <Button
+      android:id="@+id/activity_setup_remote_wipe_approve_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textAllCaps="true"
+      android:text="@string/activity_setup_remote_wipe_approve_button_text" />
+
+  </LinearLayout>
+
+</LinearLayout>
