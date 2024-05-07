@@ -36,7 +36,6 @@ import com.filipblazekovic.totpy.task.OTPRecalculationTask;
 import com.filipblazekovic.totpy.task.RemoteWipeTask;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -51,7 +50,7 @@ public class TokensActivity extends AppCompatActivity {
 
   private ScheduledFuture<?> otpRecalculationTaskController = null;
 
-  private TokensAdapter adapter;
+  private TokensAdapter adapter = null;
 
   private RecyclerView recyclerView;
 
@@ -133,10 +132,8 @@ public class TokensActivity extends AppCompatActivity {
     deletePanel = new DeletePanel();
     exportPanel = new ExportPanel();
 
-    adapter = new TokensAdapter(this, new ArrayList<>());
     recyclerView = findViewById(R.id.tokens_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.setAdapter(adapter);
     recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     recyclerView.setItemAnimator(null);
 
@@ -352,9 +349,14 @@ public class TokensActivity extends AppCompatActivity {
     if (otpRecalculationTaskController != null) {
       otpRecalculationTaskController.cancel(true);
     }
-    adapter.replaceTokens(tokens);
-    adapter.toggleSelectCheckboxVisibility(currentFragment != FragmentType.SCAN_QR_CODE);
-    adapter.notifyDataSetChanged();
+    if (adapter == null) {
+      adapter = new TokensAdapter(this, tokens);
+      recyclerView.setAdapter(adapter);
+    } else {
+      adapter.replaceTokens(tokens);
+      adapter.toggleSelectCheckboxVisibility(currentFragment != FragmentType.SCAN_QR_CODE);
+      adapter.notifyDataSetChanged();
+    }
     otpRecalculationTaskController = executor.scheduleWithFixedDelay(
         new OTPRecalculationTask(adapter),
         0,

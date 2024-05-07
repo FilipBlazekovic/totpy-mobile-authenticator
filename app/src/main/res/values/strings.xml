@@ -105,6 +105,7 @@
   <string name="password_input_dialog_cancel_button_text">Cancel</string>
   <string name="password_input_dialog_approve_button_text">Ok</string>
 
+  <string name="password_define_dialog_password_hint_message">Password should be at least 8 characters long and contain one of each: lowercase letter, uppercase letter, number, symbol.</string>
   <string name="password_define_dialog_enter_password_hint">Enter password</string>
   <string name="password_define_dialog_confirm_password_hint">Confirm password</string>
   <string name="password_define_dialog_cancel_button_text">Cancel</string>
