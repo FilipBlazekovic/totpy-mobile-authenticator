@@ -3,6 +3,8 @@ Totpy
 Mobile authenticator for generating one-time passwords based on [TOTP Protocol](https://www.rfc-editor.org/rfc/pdfrfc/rfc6238.txt.pdf).  
 Compatible desktop version of this app is also available: [totpy-desktop-authenticator](https://github.com/FilipBlazekovic/totpy-desktop-authenticator).  
 
+Tokens for one-time passwords are protected using asymmetric key pair (RSA or EC) stored in device's secure hardware (StrongBox or TEE).
+
 Supports:
 
 - protection of tokens using screen lock credentials (mandatory)
@@ -65,11 +67,12 @@ File **export_locked.json** containing tokens encrypted with AES/GCM will be gen
 Select "Import" option in the top menu and select the locked export file from which you with to import tokens.
 In case tokens are locked using this device's asymmetric key they are automatically decrypted and imported, otherwise password input dialog is shown.
 
-![07.png](doc/img/07-import-tokens.png)
+![08.png](doc/img/07-import-tokens.png)
 
 ---
 
 **SETTING-UP REMOTE WIPE**
 
-![08.png](doc/img/08-setting-up-remote-wipe.png)
+Select "Setup Remote Wipe" in the top menu and define a phrase that will trigger deletion of tokens. A foreground service will be started which will search through SMS messages in inbox directory every 3 minutes for the specified keyphrase.
 
+![08.png](doc/img/08-setting-up-remote-wipe.png)
