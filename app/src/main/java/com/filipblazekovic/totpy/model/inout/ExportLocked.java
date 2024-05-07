@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.Base64;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_EMPTY)
 public class ExportLocked {

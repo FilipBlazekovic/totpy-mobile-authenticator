@@ -348,9 +348,7 @@ public final class DataHandler {
         handler.post(() -> Toast
             .makeText(
                 context,
-                e.getMessage() == null
-                    ? context.getResources().getString(R.string.error_message_internal_error)
-                    : e.getMessage(),
+                context.getResources().getString(R.string.error_message_invalid_password),
                 Toast.LENGTH_LONG
             )
             .show());

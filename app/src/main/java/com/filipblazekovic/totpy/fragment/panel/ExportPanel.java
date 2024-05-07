@@ -43,7 +43,6 @@ public class ExportPanel extends Fragment {
 
     approveButton.setOnClickListener(v -> {
       val selectedTokens = activity.getSelectedTokens();
-      cleanupAndClose();
 
       if (!selectedTokens.isEmpty()) {
         val intent = new Intent(getActivity(), ExportTokensActivity.class);

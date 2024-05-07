@@ -1,9 +1,11 @@
 package com.filipblazekovic.totpy.activity;
 
+import android.Manifest.permission;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts.GetContent;
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import com.filipblazekovic.totpy.R;
@@ -38,6 +40,14 @@ public class ExportTokensActivity extends AppCompatActivity {
         }
       });
 
+  final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new RequestPermission(), isGranted -> {
+    if (isGranted) {
+      getScannedQRCodeContents.launch(
+          new ScanOptions().setBeepEnabled(false)
+      );
+    }
+  });
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -55,8 +65,16 @@ public class ExportTokensActivity extends AppCompatActivity {
     final ImageButton loadPublicKeyFileButton = findViewById(R.id.activity_export_tokens_load_file_button);
     final ImageButton enterPasswordButton = findViewById(R.id.activity_export_tokens_enter_password_button);
 
-    scanPublicKeyQRCodeButton.setOnClickListener(v -> getScannedQRCodeContents.launch(new ScanOptions()));
+    scanPublicKeyQRCodeButton.setOnClickListener(v -> {
+      if (Common.shouldRequestCameraPermission(ExportTokensActivity.this)) {
+        requestPermissionLauncher.launch(permission.CAMERA);
+        return;
+      }
+      getScannedQRCodeContents.launch(new ScanOptions().setBeepEnabled(false));
+    });
+
     loadPublicKeyFileButton.setOnClickListener(v -> getFileContents.launch(Common.JSON_FILE_TYPE));
+
     enterPasswordButton.setOnClickListener(v -> {
       final DialogFragment passwordDefineDialog = PasswordDefineDialog.newInstance();
       passwordDefineDialog.show(getSupportFragmentManager(), Common.DIALOG_LABEL);

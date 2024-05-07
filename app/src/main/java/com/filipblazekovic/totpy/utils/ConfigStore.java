@@ -108,7 +108,7 @@ public class ConfigStore {
     if (config.getLastExportDateTime() != null) {
       editor.putString("lastExportDateTime", config.getLastExportDateTime().toString());
     }
-    if (config.getLastExportDateTime() != null) {
+    if (config.getLastRemoteWipeDateTime() != null) {
       editor.putString("lastRemoteWipeDateTime", config.getLastRemoteWipeDateTime().toString());
     }
     if (config.getLastRemoteWipeTaskRunTimestamp() != null) {
