@@ -58,8 +58,8 @@ public class ExportTokensActivity extends AppCompatActivity {
     scanPublicKeyQRCodeButton.setOnClickListener(v -> getScannedQRCodeContents.launch(new ScanOptions()));
     loadPublicKeyFileButton.setOnClickListener(v -> getFileContents.launch(Common.JSON_FILE_TYPE));
     enterPasswordButton.setOnClickListener(v -> {
-      final DialogFragment loadOtpAuthUriDialog = PasswordDefineDialog.newInstance();
-      loadOtpAuthUriDialog.show(getSupportFragmentManager(), Common.DIALOG_LABEL);
+      final DialogFragment passwordDefineDialog = PasswordDefineDialog.newInstance();
+      passwordDefineDialog.show(getSupportFragmentManager(), Common.DIALOG_LABEL);
     });
   }
 

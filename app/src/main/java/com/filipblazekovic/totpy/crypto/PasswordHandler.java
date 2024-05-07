@@ -3,6 +3,7 @@ package com.filipblazekovic.totpy.crypto;
 import android.content.Context;
 import com.filipblazekovic.totpy.exception.PasswordsDoNotMatchException;
 import com.filipblazekovic.totpy.exception.WeakPasswordException;
+import com.filipblazekovic.totpy.exception.WeakPhraseException;
 import java.util.Arrays;
 
 public final class PasswordHandler {
@@ -12,10 +13,9 @@ public final class PasswordHandler {
   private PasswordHandler() {
   }
 
-  // TODO: FIXATI => Promijeniti exception type i poruku da se odnosi na remote wipe phrase!!
-  public static void validate(Context context, String remoteWipePhrase) throws WeakPasswordException {
+  public static void validate(Context context, String remoteWipePhrase) throws WeakPhraseException {
     if (remoteWipePhrase.length() < 8) {
-      throw new WeakPasswordException(context);
+      throw new WeakPhraseException(context);
     }
 
     boolean hasLowercase = false;
@@ -49,13 +49,8 @@ public final class PasswordHandler {
       return;
     }
 
-    throw new WeakPasswordException(context);
+    throw new WeakPhraseException(context);
   }
-
-  /* ------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   public static void validate(Context context, char[] password, char[] passwordConfirmation) throws PasswordsDoNotMatchException, WeakPasswordException {
     if (!Arrays.equals(password, passwordConfirmation)) {

@@ -86,6 +86,7 @@
   <string name="security_details_dialog_token_encryption_algorithm_ecies">ECIES (secp256r1 curve)</string>
 
   <string name="security_details_dialog_last_export_label">Last token export performed on:</string>
+  <string name="security_details_dialog_last_remote_wipe_label">Last remote wipe performed on:</string>
 
   <string name="security_details_dialog_device_remote_wipe_positive">Remote wipe: ON</string>
   <string name="security_details_dialog_device_remote_wipe_negative">Remote wipe: OFF</string>
@@ -113,17 +114,13 @@
 
   <string name="error_message_internal_error">Something went wrong!</string>
   <string name="error_message_invalid_token_uri_format">Invalid Token URI format!</string>
-  <string name="error_message_mandatory_parameter_empty">Mandatory parameter empty:</string>
+  <string name="error_message_mandatory_parameter_empty">Mandatory parameter empty: </string>
   <string name="error_message_passwords_do_not_match">Entered passwords do not match!</string>
   <string name="error_message_weak_password">Entered password not strong enough!</string>
+  <string name="error_message_weak_phrase">Entered phrase not strong enough!</string>
 
   <string name="remote_wipe_service_notification_title">Totpy</string>
   <string name="remote_wipe_service_notification_message">Remote wipe service started</string>
-
-
-
-
-
 
 </resources>
 

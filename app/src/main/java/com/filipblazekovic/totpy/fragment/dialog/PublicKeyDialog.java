@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +18,13 @@ import androidx.fragment.app.DialogFragment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filipblazekovic.totpy.R;
 import com.filipblazekovic.totpy.model.inout.ExportLockingPublicKey;
+import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.DataHandler;
 import com.filipblazekovic.totpy.utils.QRCode;
 import java.nio.charset.StandardCharsets;
 
 public class PublicKeyDialog extends DialogFragment {
+
   private final Context context;
   private String publicKey;
 
@@ -60,7 +63,7 @@ public class PublicKeyDialog extends DialogFragment {
           QRCode.generate(publicKey)
       );
     } catch (Exception e) {
-      e.printStackTrace();
+      Log.e(Common.TAG, "Could not generate QR code image", e);
     }
 
     final ImageButton copyToClipboardButton = view.findViewById(R.id.dialog_show_public_key_copy_to_clipboard_button);

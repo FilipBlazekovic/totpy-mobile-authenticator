@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts.GetContent;
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -26,6 +27,7 @@ import com.filipblazekovic.totpy.fragment.panel.ScanQRCodePanel;
 import com.filipblazekovic.totpy.fragment.panel.SearchPanel;
 import com.filipblazekovic.totpy.model.inout.ExportLocked;
 import com.filipblazekovic.totpy.model.internal.Token;
+import com.filipblazekovic.totpy.model.internal.FragmentType;
 import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.ConfigStore;
 import com.filipblazekovic.totpy.utils.DataHandler;
@@ -61,6 +63,8 @@ public class TokensActivity extends AppCompatActivity {
 
   private ExportPanel exportPanel;
 
+  private FragmentType currentFragment = FragmentType.SCAN_QR_CODE;
+
   private MenuItem tokenCategoryMenuItem;
 
   private boolean tokenCategoryVisible = false;
@@ -68,7 +72,6 @@ public class TokensActivity extends AppCompatActivity {
   private final BroadcastReceiver remoteWipeSignalReceiver = new BroadcastReceiver() {
     @Override
     public void onReceive(Context context, Intent intent) {
-      adapter.getTokens().forEach(Token::clear);
       startActivity(new Intent(TokensActivity.this, LoginActivity.class));
     }
   };
@@ -105,7 +108,6 @@ public class TokensActivity extends AppCompatActivity {
         DataHandler.loadLockedExport(TokensActivity.this, uri);
       });
 
-
   final ActivityResultLauncher<String> requestPermissionLauncher = registerForActivityResult(new RequestPermission(), isGranted -> {
     if (isGranted) {
       getScannedQRCodeContents.launch(
@@ -120,20 +122,34 @@ public class TokensActivity extends AppCompatActivity {
     setContentView(R.layout.activity_tokens);
     setSupportActionBar(findViewById(R.id.toolbar));
 
-    if (savedInstanceState == null) {
-      searchPanel = new SearchPanel();
-      scanQRCodePanel = new ScanQRCodePanel();
-      deletePanel = new DeletePanel();
-      exportPanel = new ExportPanel();
-      showScanQRCodeFragment();
+    val intent = getIntent();
+    restoreState(savedInstanceState);
+    if (intent != null) {
+      restoreState(intent.getExtras());
     }
+
+    searchPanel = new SearchPanel();
+    scanQRCodePanel = new ScanQRCodePanel();
+    deletePanel = new DeletePanel();
+    exportPanel = new ExportPanel();
 
     adapter = new TokensAdapter(this, new ArrayList<>());
     recyclerView = findViewById(R.id.tokens_view);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
     recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-    recyclerView.setItemAnimator(null);       // TODO: This may be necessary due to a bug in a RecyclerView
+    recyclerView.setItemAnimator(null);
+
+    switch (currentFragment) {
+      case DELETE:
+        showDeleteAuthenticatorsFragment();
+        break;
+      case EXPORT:
+        showExportAuthenticatorsFragment();
+        break;
+      default:
+        showScanQRCodeFragment();
+    }
 
     ContextCompat.registerReceiver(
         this,
@@ -152,7 +168,7 @@ public class TokensActivity extends AppCompatActivity {
     if (otpRecalculationTaskController != null) {
       otpRecalculationTaskController.cancel(true);
     }
-    otpRecalculationTaskController = executor.scheduleAtFixedRate(
+    otpRecalculationTaskController = executor.scheduleWithFixedDelay(
         new OTPRecalculationTask(adapter),
         0,
         1,
@@ -172,6 +188,22 @@ public class TokensActivity extends AppCompatActivity {
     executor.shutdownNow();
     adapter.getTokens().forEach(Token::clear);
     unregisterReceiver(remoteWipeSignalReceiver);
+  }
+
+  @Override
+  protected void onSaveInstanceState(@NonNull Bundle outState) {
+    super.onSaveInstanceState(outState);
+    outState.putString("currentFragment", currentFragment.name());
+  }
+
+  private void restoreState(Bundle bundle) {
+    if (bundle == null) {
+      return;
+    }
+    val temp = bundle.getString("currentFragment");
+    if (temp != null) {
+      currentFragment = FragmentType.valueOf(temp);
+    }
   }
 
   @Override
@@ -207,7 +239,7 @@ public class TokensActivity extends AppCompatActivity {
       return true;
     }
     if (item.getItemId() == R.id.menu_button_show_public_key) {
-      DataHandler.loadExportLockingPublicKey(this);
+      DataHandler.loadAndShowExportLockingPublicKey(this);
       return true;
     }
     if (item.getItemId() == R.id.menu_button_setup_remote_wipe) {
@@ -244,6 +276,8 @@ public class TokensActivity extends AppCompatActivity {
   }
 
   public void showScanQRCodeFragment() {
+    currentFragment = FragmentType.SCAN_QR_CODE;
+
     val ft = getSupportFragmentManager().beginTransaction();
     ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
     if (scanQRCodePanel.isAdded()) {
@@ -252,12 +286,17 @@ public class TokensActivity extends AppCompatActivity {
       ft.add(R.id.actions_panel, scanQRCodePanel, "ScanQRCodePanel");
     }
 
-    if (deletePanel.isAdded()) { ft.hide(deletePanel); }
-    if (exportPanel.isAdded()) { ft.hide(exportPanel); }
+    if (deletePanel.isAdded()) {
+      ft.hide(deletePanel);
+    }
+    if (exportPanel.isAdded()) {
+      ft.hide(exportPanel);
+    }
     ft.commit();
   }
 
   private void showDeleteAuthenticatorsFragment() {
+    currentFragment = FragmentType.DELETE;
     val ft = getSupportFragmentManager().beginTransaction();
     ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
     if (deletePanel.isAdded()) {
@@ -266,12 +305,17 @@ public class TokensActivity extends AppCompatActivity {
       ft.add(R.id.actions_panel, deletePanel, "DeletePanel");
     }
 
-    if (scanQRCodePanel.isAdded()) { ft.hide(scanQRCodePanel); }
-    if (exportPanel.isAdded()) { ft.hide(exportPanel); }
+    if (scanQRCodePanel.isAdded()) {
+      ft.hide(scanQRCodePanel);
+    }
+    if (exportPanel.isAdded()) {
+      ft.hide(exportPanel);
+    }
     ft.commit();
   }
 
   private void showExportAuthenticatorsFragment() {
+    currentFragment = FragmentType.EXPORT;
     val ft = getSupportFragmentManager().beginTransaction();
     ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
     if (exportPanel.isAdded()) {
@@ -280,8 +324,12 @@ public class TokensActivity extends AppCompatActivity {
       ft.add(R.id.actions_panel, exportPanel, "ExportPanel");
     }
 
-    if (scanQRCodePanel.isAdded()) { ft.hide(scanQRCodePanel); }
-    if (deletePanel.isAdded()) { ft.hide(deletePanel); }
+    if (scanQRCodePanel.isAdded()) {
+      ft.hide(scanQRCodePanel);
+    }
+    if (deletePanel.isAdded()) {
+      ft.hide(deletePanel);
+    }
     ft.commit();
   }
 
@@ -300,21 +348,14 @@ public class TokensActivity extends AppCompatActivity {
     ft.commit();
   }
 
-  public void toggleSelectCheckboxVisibility(boolean visible) {
-    otpRecalculationTaskController.cancel(true);
-    adapter.toggleSelectCheckboxVisibility(visible);
-    otpRecalculationTaskController = executor.scheduleAtFixedRate(
-        new OTPRecalculationTask(adapter),
-        0,
-        1,
-        TimeUnit.SECONDS
-    );
-  }
-
-  public void toggleSelectCheckbox(boolean selected) {
-    otpRecalculationTaskController.cancel(true);
-    adapter.toggleSelectCheckbox(selected);
-    otpRecalculationTaskController = executor.scheduleAtFixedRate(
+  public void loadTokens(List<Token> tokens) {
+    if (otpRecalculationTaskController != null) {
+      otpRecalculationTaskController.cancel(true);
+    }
+    adapter.replaceTokens(tokens);
+    adapter.toggleSelectCheckboxVisibility(currentFragment != FragmentType.SCAN_QR_CODE);
+    adapter.notifyDataSetChanged();
+    otpRecalculationTaskController = executor.scheduleWithFixedDelay(
         new OTPRecalculationTask(adapter),
         0,
         1,
@@ -323,9 +364,11 @@ public class TokensActivity extends AppCompatActivity {
   }
 
   public void search(String searchPhrase) {
-    otpRecalculationTaskController.cancel(true);
+    if (otpRecalculationTaskController != null) {
+      otpRecalculationTaskController.cancel(true);
+    }
     adapter.search(searchPhrase);
-    otpRecalculationTaskController = executor.scheduleAtFixedRate(
+    otpRecalculationTaskController = executor.scheduleWithFixedDelay(
         new OTPRecalculationTask(adapter),
         0,
         1,
@@ -333,12 +376,25 @@ public class TokensActivity extends AppCompatActivity {
     );
   }
 
-  public void loadTokens(List<Token> tokens) {
+  public void toggleSelectCheckbox(boolean selected) {
     if (otpRecalculationTaskController != null) {
       otpRecalculationTaskController.cancel(true);
     }
-    adapter.replaceTokens(tokens);
-    otpRecalculationTaskController = executor.scheduleAtFixedRate(
+    adapter.toggleSelectCheckbox(selected);
+    otpRecalculationTaskController = executor.scheduleWithFixedDelay(
+        new OTPRecalculationTask(adapter),
+        0,
+        1,
+        TimeUnit.SECONDS
+    );
+  }
+
+  public void toggleSelectCheckboxVisibility(boolean visible) {
+    if (otpRecalculationTaskController != null) {
+      otpRecalculationTaskController.cancel(true);
+    }
+    adapter.toggleSelectCheckboxVisibility(visible);
+    otpRecalculationTaskController = executor.scheduleWithFixedDelay(
         new OTPRecalculationTask(adapter),
         0,
         1,
@@ -347,13 +403,22 @@ public class TokensActivity extends AppCompatActivity {
   }
 
   private void toggleTokenCategoryVisibility() {
-    otpRecalculationTaskController.cancel(true);
-    otpRecalculationTaskController = executor.scheduleAtFixedRate(
+    if (otpRecalculationTaskController != null) {
+      otpRecalculationTaskController.cancel(true);
+    }
+    otpRecalculationTaskController = executor.scheduleWithFixedDelay(
         new OTPRecalculationTask(adapter),
         0,
         1,
         TimeUnit.SECONDS
     );
+  }
+
+  public void setTokenCategoryVisible(boolean visible) {
+    tokenCategoryVisible = visible;
+    if (tokenCategoryMenuItem != null) {
+      tokenCategoryMenuItem.setChecked(visible);
+    }
   }
 
   public List<Integer> getSelectedTokens() {
@@ -382,13 +447,6 @@ public class TokensActivity extends AppCompatActivity {
   public void processPasswordInputDialogApproveButton(ExportLocked exportLocked, char[] password) {
     Common.dismissDialog(TokensActivity.this);
     DataHandler.loadLockedExport(this, exportLocked, password);
-  }
-
-  public void setTokenCategoryVisible(boolean visible) {
-    tokenCategoryVisible = visible;
-    if (tokenCategoryMenuItem != null) {
-      tokenCategoryMenuItem.setChecked(visible);
-    }
   }
 
 }

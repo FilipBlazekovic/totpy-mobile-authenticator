@@ -69,5 +69,4 @@
     android:title="@string/menu_button_logout_label"
     android:icon="@drawable/core_icon_power"
     app:showAsAction="never|withText"/>
-
 </menu>

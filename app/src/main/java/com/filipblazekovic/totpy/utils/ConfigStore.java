@@ -45,7 +45,7 @@ public class ConfigStore {
       );
       config.setRemoteWipeServiceStatus(
           RemoteWipeServiceStatus.from(
-              sharedPreferences.getString("remoteWipeServiceStatus",  null)
+              sharedPreferences.getString("remoteWipeServiceStatus", null)
           )
       );
     }
@@ -103,10 +103,8 @@ public class ConfigStore {
 
     editor.putBoolean("tokenCategoryVisible", config.isTokenCategoryVisible());
     editor.putBoolean("smsRemoteWipeOn", config.isSmsRemoteWipeOn());
+    editor.putString("remoteWipeKeyphrase", config.getRemoteWipeKeyphrase());
 
-    if (config.getRemoteWipeKeyphrase() != null) {
-      editor.putString("remoteWipeKeyphrase", config.getRemoteWipeKeyphrase());
-    }
     if (config.getLastExportDateTime() != null) {
       editor.putString("lastExportDateTime", config.getLastExportDateTime().toString());
     }

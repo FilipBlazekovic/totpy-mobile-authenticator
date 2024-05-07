@@ -127,7 +127,6 @@ public class AddEditTokenActivity extends AppCompatActivity {
         new ScanOptions().setBeepEnabled(false))
     );
 
-
     scanQRCodeButton.setOnClickListener(v -> {
       if (Common.shouldRequestCameraPermission(AddEditTokenActivity.this)) {
         requestPermissionLauncher.launch(permission.CAMERA);
@@ -155,6 +154,7 @@ public class AddEditTokenActivity extends AppCompatActivity {
         } else {
           DataHandler.updateToken(AddEditTokenActivity.this, token.merge(collectedToken));
         }
+        startActivity(new Intent(this, TokensActivity.class));
       } catch (Exception e) {
         Toast
             .makeText(
@@ -166,8 +166,6 @@ public class AddEditTokenActivity extends AppCompatActivity {
             )
             .show();
       }
-
-      startActivity(new Intent(this, TokensActivity.class));
     });
   }
 

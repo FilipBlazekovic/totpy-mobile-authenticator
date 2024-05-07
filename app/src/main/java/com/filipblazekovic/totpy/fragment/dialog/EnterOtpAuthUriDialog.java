@@ -38,8 +38,8 @@ public class EnterOtpAuthUriDialog extends DialogFragment {
     final Button cancelButton = view.findViewById(R.id.dialog_enter_otpauth_uri_cancel_button);
     final Button approveButton = view.findViewById(R.id.dialog_enter_otpauth_uri_approve_button);
 
-    cancelButton.setOnClickListener(v -> ((AddEditTokenActivity)getActivity()).processEnterOtpAuthUriDialogCancelButton());
-    approveButton.setOnClickListener(v -> ((AddEditTokenActivity)getActivity()).processEnterOtpAuthUriDialogApproveButton(
+    cancelButton.setOnClickListener(v -> ((AddEditTokenActivity) getActivity()).processEnterOtpAuthUriDialogCancelButton());
+    approveButton.setOnClickListener(v -> ((AddEditTokenActivity) getActivity()).processEnterOtpAuthUriDialogApproveButton(
         enteredOtpAuthUriField.getEditText().getText().toString())
     );
   }

@@ -55,7 +55,7 @@ public class SetupRemoteWipeActivity extends AppCompatActivity {
     );
 
     approveButton.setOnClickListener(v -> {
-      if (!remoteWipeOnSwitch.isSelected()) {
+      if (!remoteWipeOnSwitch.isChecked()) {
         cancelRemoteWipe();
         return;
       }
@@ -82,10 +82,11 @@ public class SetupRemoteWipeActivity extends AppCompatActivity {
         new Intent(this, RemoteWipeService.class)
             .setAction(RemoteWipeServiceAction.STOP.name())
     );
+
+    startActivity(new Intent(this, TokensActivity.class));
   }
 
   private void setupRemoteWipe() {
-
     val remoteWipePhrase = remoteWipeKeyphraseView.getEditText().getText().toString();
     try {
       PasswordHandler.validate(SetupRemoteWipeActivity.this, remoteWipePhrase);
@@ -103,19 +104,11 @@ public class SetupRemoteWipeActivity extends AppCompatActivity {
     }
 
     ConfigStore.setSmsRemoteWipeOn(SetupRemoteWipeActivity.this, remoteWipePhrase);
-
-    val remoteWipeServiceStatus = ConfigStore
-        .get(SetupRemoteWipeActivity.this)
-        .getRemoteWipeServiceStatus();
-
-    if (remoteWipeServiceStatus == RemoteWipeServiceStatus.RUNNING) {
-      return;
-    }
-
     startForegroundService(
         new Intent(this, RemoteWipeService.class)
             .setAction(RemoteWipeServiceAction.START.name())
     );
+    startActivity(new Intent(this, TokensActivity.class));
   }
 
 }

@@ -17,6 +17,9 @@ import lombok.val;
 
 public class ExportPanel extends Fragment {
 
+  private TokensActivity activity;
+  private CheckBox selectAllCheckbox;
+
   public ExportPanel() {
     super(R.layout.panel_export);
   }
@@ -25,23 +28,22 @@ public class ExportPanel extends Fragment {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
-    final CheckBox selectAllCheckbox = view.findViewById(R.id.panel_export_select_all_checkbox);
     final ImageButton cancelButton = view.findViewById(R.id.panel_export_cancel_button);
     final ImageButton approveButton = view.findViewById(R.id.panel_export_approve_button);
 
-    final TokensActivity activity = (TokensActivity) getActivity();
+    activity = (TokensActivity) getActivity();
 
+    selectAllCheckbox = view.findViewById(R.id.panel_export_select_all_checkbox);
     selectAllCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> activity.toggleSelectCheckbox(isChecked));
 
     cancelButton.setOnClickListener(v -> {
       activity.toggleSelectCheckboxVisibility(false);
-      activity.showScanQRCodeFragment();
+      cleanupAndClose();
     });
 
     approveButton.setOnClickListener(v -> {
       val selectedTokens = activity.getSelectedTokens();
-      activity.toggleSelectCheckboxVisibility(false);
-      activity.showScanQRCodeFragment();
+      cleanupAndClose();
 
       if (!selectedTokens.isEmpty()) {
         val intent = new Intent(getActivity(), ExportTokensActivity.class);
@@ -52,6 +54,13 @@ public class ExportPanel extends Fragment {
         startActivity(intent);
       }
     });
+  }
+
+  private void cleanupAndClose() {
+    selectAllCheckbox.setOnCheckedChangeListener(null);
+    selectAllCheckbox.setChecked(false);
+    selectAllCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> activity.toggleSelectCheckbox(isChecked));
+    activity.showScanQRCodeFragment();
   }
 
 }

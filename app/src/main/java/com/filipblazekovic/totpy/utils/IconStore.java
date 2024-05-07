@@ -130,8 +130,10 @@ public final class IconStore {
     icons.put(IssuerIcon.ZOOM, R.drawable.issuer_icon_zoom);
     icons.put(IssuerIcon.UNKNOWN, R.drawable.issuer_icon_unknown);
   }
+
   private IconStore() {
   }
+
   public static Drawable get(Context context, IssuerIcon icon) {
     val resourceId = icons.get(icon);
     return ResourcesCompat.getDrawable(

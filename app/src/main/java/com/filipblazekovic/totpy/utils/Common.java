@@ -32,11 +32,10 @@ public class Common {
     return status != PackageManager.PERMISSION_GRANTED;
   }
 
-
   public static void dismissDialog(Context context) {
-    val fragment = ((AppCompatActivity)context).getSupportFragmentManager().findFragmentByTag(DIALOG_LABEL);
+    val fragment = ((AppCompatActivity) context).getSupportFragmentManager().findFragmentByTag(DIALOG_LABEL);
     if (fragment != null) {
-      final DialogFragment df = (DialogFragment) fragment;
+      val df = (DialogFragment) fragment;
       df.dismiss();
     }
   }

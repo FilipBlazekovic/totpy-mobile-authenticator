@@ -18,7 +18,7 @@ import lombok.val;
 
 public class SecurityDetailsDialog extends DialogFragment {
 
-  private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy mm:hh:ss");
+  private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
   private final Context context;
 
@@ -53,6 +53,7 @@ public class SecurityDetailsDialog extends DialogFragment {
     final TextView usedKeystoreView = view.findViewById(R.id.used_keystore_view);
     final TextView tokenEncryptionView = view.findViewById(R.id.token_encryption_view);
     final TextView lastExportView = view.findViewById(R.id.last_export_view);
+    final TextView lastRemoteWipeView = view.findViewById(R.id.last_remote_wipe_view);
     final TextView remoteWipeOnView = view.findViewById(R.id.remote_wipe_on_view);
 
     val config = ConfigStore.get(context);
@@ -88,6 +89,12 @@ public class SecurityDetailsDialog extends DialogFragment {
 
     lastExportView.setText(
         (config.getLastExportDateTime() == null)
+            ? ""
+            : config.getLastExportDateTime().format(DATE_TIME_FORMATTER)
+    );
+
+    lastRemoteWipeView.setText(
+        (config.getLastRemoteWipeDateTime() == null)
             ? ""
             : config.getLastExportDateTime().format(DATE_TIME_FORMATTER)
     );

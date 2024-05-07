@@ -6,7 +6,9 @@ public enum RemoteWipeServiceStatus {
   STOPPED;
 
   public static RemoteWipeServiceStatus from(String value) {
-    return value == null ? STOPPED : RemoteWipeServiceStatus.valueOf(value);
+    return value == null
+        ? STOPPED
+        : RemoteWipeServiceStatus.valueOf(value);
   }
 
 }

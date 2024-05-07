@@ -43,8 +43,8 @@ public class PasswordDefineDialog extends DialogFragment {
     final Button cancelButton = view.findViewById(R.id.dialog_password_define_cancel_button);
     final Button approveButton = view.findViewById(R.id.dialog_password_define_approve_button);
 
-    cancelButton.setOnClickListener(v -> ((ExportTokensActivity)getActivity()).processPasswordDefineDialogCancelButton());
-    approveButton.setOnClickListener(v -> ((ExportTokensActivity)getActivity()).processPasswordDefineDialogApproveButton(
+    cancelButton.setOnClickListener(v -> ((ExportTokensActivity) getActivity()).processPasswordDefineDialogCancelButton());
+    approveButton.setOnClickListener(v -> ((ExportTokensActivity) getActivity()).processPasswordDefineDialogApproveButton(
         enterPasswordView.getEditText().getText().toString(),
         confirmPasswordView.getEditText().getText().toString()
     ));

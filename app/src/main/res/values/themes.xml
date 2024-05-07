@@ -62,5 +62,4 @@
   <style name="ThemeOverlay.App.CircularProgressIndicator" parent="">
     <item name="colorPrimary">@color/day_theme_primary</item>
   </style>
-
 </resources>

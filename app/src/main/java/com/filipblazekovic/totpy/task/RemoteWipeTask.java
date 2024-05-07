@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Telephony;
 import android.util.Log;
-import com.filipblazekovic.totpy.crypto.CryptoHandler;
 import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.ConfigStore;
 import com.filipblazekovic.totpy.utils.DataHandler;
@@ -16,7 +15,7 @@ public class RemoteWipeTask implements Runnable {
 
   public static String REMOTE_WIPE_BROADCAST_ACTION = "com.filipblazekovic.totpy.RemoteWipeTask";
 
-  private Context context;
+  private final Context context;
 
   public RemoteWipeTask(Context context) {
     this.context = context;
@@ -24,7 +23,6 @@ public class RemoteWipeTask implements Runnable {
 
   @Override
   public void run() {
-
     val config = ConfigStore.get(context);
     val lastRemoteWipeTaskRunTimestamp = config.getLastRemoteWipeTaskRunTimestamp();
 
@@ -33,8 +31,8 @@ public class RemoteWipeTask implements Runnable {
         : Calendar.getInstance().getTimeInMillis();
 
     searchForRemoteWipeKeyword(
-          cutoffTime,
-          config.getRemoteWipeKeyphrase()
+        cutoffTime,
+        config.getRemoteWipeKeyphrase()
     );
   }
 
@@ -56,18 +54,20 @@ public class RemoteWipeTask implements Runnable {
         do {
           val smsBody = cursor.getString(cursor.getColumnIndexOrThrow(Telephony.Sms.BODY));
           if (smsBody != null && smsBody.contains(keyphrase)) {
+            ConfigStore.updateLastRemoteWipeDateTime(context);
+            DataHandler.deleteTokens(context);
             context.sendBroadcast(
                 new Intent(REMOTE_WIPE_BROADCAST_ACTION)
             );
-            DataHandler.deleteTokens(context);
-            CryptoHandler.deleteAuthenticatorKeys();
-            ConfigStore.updateLastRemoteWipeDateTime(context);
             break;
           }
         } while (cursor.moveToNext());
       }
 
-      ConfigStore.updateLastRemoteWipeTaskRunTimestamp(context, Calendar.getInstance().getTimeInMillis());
+      ConfigStore.updateLastRemoteWipeTaskRunTimestamp(
+          context,
+          Calendar.getInstance().getTimeInMillis()
+      );
 
     } catch (Exception e) {
       Log.e(Common.TAG, "Exception thrown while searching for remote wipe keyword in SMS messages", e);

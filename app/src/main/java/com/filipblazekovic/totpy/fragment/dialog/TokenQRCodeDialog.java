@@ -1,6 +1,7 @@
 package com.filipblazekovic.totpy.fragment.dialog;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.filipblazekovic.totpy.R;
 import com.filipblazekovic.totpy.model.internal.Token;
+import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.OTPAuth;
 import com.filipblazekovic.totpy.utils.QRCode;
 
@@ -48,7 +50,7 @@ public class TokenQRCodeDialog extends DialogFragment {
           )
       );
     } catch (Exception e) {
-      e.printStackTrace();
+      Log.e(Common.TAG, "Could not generate QR code image", e);
     }
   }
 

@@ -46,7 +46,7 @@ public final class DataHandler {
   public static void loadConfig(Context context) {
     executor.execute(() -> {
       val config = ConfigStore.get(context);
-      handler.post(() -> ((TokensActivity)context).setTokenCategoryVisible(config.isTokenCategoryVisible()));
+      handler.post(() -> ((TokensActivity) context).setTokenCategoryVisible(config.isTokenCategoryVisible()));
     });
   }
 
@@ -55,7 +55,7 @@ public final class DataHandler {
       val deviceSecurityInfo = CryptoHandler.getDeviceSecurityInfo(context);
       handler.post(() -> SecurityDetailsDialog
           .newInstance(context, deviceSecurityInfo)
-          .show(((TokensActivity)context).getSupportFragmentManager(), Common.DIALOG_LABEL));
+          .show(((TokensActivity) context).getSupportFragmentManager(), Common.DIALOG_LABEL));
     });
   }
 
@@ -151,7 +151,10 @@ public final class DataHandler {
             .writeValueAsString(exportLocked)
             .getBytes(StandardCharsets.UTF_8);
 
-        handler.post(() -> shareFile(context, exportLockedBytes, "export_locked.json"));
+        handler.post(() -> {
+          shareFile(context, exportLockedBytes, "export_locked.json");
+          ConfigStore.updateLastExportDateTime(context);
+        });
 
       } catch (Exception e) {
         Log.e(Common.TAG, "Exception thrown while generating locked export", e);
@@ -182,7 +185,10 @@ public final class DataHandler {
             .writeValueAsString(exportLocked)
             .getBytes(StandardCharsets.UTF_8);
 
-        handler.post(() -> shareFile(context, exportLockedBytes, "export_locked.json"));
+        handler.post(() -> {
+          shareFile(context, exportLockedBytes, "export_locked.json");
+          ConfigStore.updateLastExportDateTime(context);
+        });
 
       } catch (Exception e) {
         Log.e(Common.TAG, "Exception thrown while generating locked export", e);
@@ -208,7 +214,10 @@ public final class DataHandler {
             .writeValueAsString(exportLocked)
             .getBytes(StandardCharsets.UTF_8);
 
-        handler.post(() -> shareFile(context, exportLockedBytes, "export_locked.json"));
+        handler.post(() -> {
+          shareFile(context, exportLockedBytes, "export_locked.json");
+          ConfigStore.updateLastExportDateTime(context);
+        });
 
       } catch (Exception e) {
         Log.e(Common.TAG, "Exception thrown while generating locked export", e);
@@ -266,12 +275,12 @@ public final class DataHandler {
     });
   }
 
-  public static void loadExportLockingPublicKey(Context context) {
+  public static void loadAndShowExportLockingPublicKey(Context context) {
     executor.execute(() -> {
       val publicKey = CryptoHandler.getExportLockingPublicKey();
       handler.post(() -> PublicKeyDialog
           .newInstance(context, publicKey)
-          .show(((TokensActivity)context).getSupportFragmentManager(), Common.DIALOG_LABEL));
+          .show(((TokensActivity) context).getSupportFragmentManager(), Common.DIALOG_LABEL));
     });
   }
 
@@ -305,7 +314,7 @@ public final class DataHandler {
         // PROCESS PASSWORD PROTECTED EXPORT
         handler.post(() -> {
           final DialogFragment fragment = PasswordInputDialog.newInstance(exportLocked);
-          fragment.show(((TokensActivity)context).getSupportFragmentManager(), Common.DIALOG_LABEL);
+          fragment.show(((TokensActivity) context).getSupportFragmentManager(), Common.DIALOG_LABEL);
         });
 
       } catch (Exception e) {
