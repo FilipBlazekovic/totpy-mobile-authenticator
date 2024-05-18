@@ -48,20 +48,6 @@ public final class KDF {
     );
   }
 
-  @SneakyThrows
-  static SecretKey hkdf(byte[] sharedSecret) {
-    return new SecretKeySpec(
-        Hkdf.computeHkdf(
-            HKDF_ALGORITHM,
-            sharedSecret,
-            new byte[0],
-            new byte[0],
-            DESIRED_KEY_LENGTH
-        ),
-        KEY_ALGORITHM
-    );
-  }
-
   // Use ephemoral public key here (on both sides of ECDH),
   // the one who's private key was used to encrypt the data
   @SneakyThrows
