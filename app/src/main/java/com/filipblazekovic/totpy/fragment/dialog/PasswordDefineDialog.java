@@ -14,9 +14,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class PasswordDefineDialog extends DialogFragment {
 
-  private PasswordDefineDialog() {
-  }
-
   public static PasswordDefineDialog newInstance() {
     return new PasswordDefineDialog();
   }

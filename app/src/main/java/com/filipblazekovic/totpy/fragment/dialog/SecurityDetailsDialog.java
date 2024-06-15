@@ -1,6 +1,5 @@
 package com.filipblazekovic.totpy.fragment.dialog;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filipblazekovic.totpy.R;
+import com.filipblazekovic.totpy.activity.TokensActivity;
 import com.filipblazekovic.totpy.model.internal.DeviceSecurityInfo;
 import com.filipblazekovic.totpy.model.shared.AsymmetricKeyAlgorithm;
 import com.filipblazekovic.totpy.utils.ConfigStore;
@@ -20,23 +21,30 @@ public class SecurityDetailsDialog extends DialogFragment {
 
   private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-  private final Context context;
+  private DeviceSecurityInfo deviceSecurityInfo;
 
-  private final DeviceSecurityInfo deviceSecurityInfo;
-
-  private SecurityDetailsDialog(Context context, DeviceSecurityInfo deviceSecurityInfo) {
-    this.context = context;
-    this.deviceSecurityInfo = deviceSecurityInfo;
-  }
-
-  public static SecurityDetailsDialog newInstance(Context context, DeviceSecurityInfo deviceSecurityInfo) {
-    return new SecurityDetailsDialog(context, deviceSecurityInfo);
+  public static SecurityDetailsDialog newInstance(DeviceSecurityInfo deviceSecurityInfo) {
+    val dialog = new SecurityDetailsDialog();
+    try {
+      val args = new Bundle();
+      args.putString("deviceSecurityInfo", new ObjectMapper().writeValueAsString(deviceSecurityInfo));
+      dialog.setArguments(args);
+    } catch (Exception ignored) {
+    }
+    return dialog;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setStyle(STYLE_NO_TITLE, R.style.TotpyDialogTheme);
+    try {
+      deviceSecurityInfo = new ObjectMapper().readValue(
+          getArguments().getString("deviceSecurityInfo", null),
+          DeviceSecurityInfo.class
+      );
+    } catch (Exception ignored) {
+    }
     setShowsDialog(true);
   }
 
@@ -55,6 +63,8 @@ public class SecurityDetailsDialog extends DialogFragment {
     final TextView lastExportView = view.findViewById(R.id.last_export_view);
     final TextView lastRemoteWipeView = view.findViewById(R.id.last_remote_wipe_view);
     final TextView remoteWipeOnView = view.findViewById(R.id.remote_wipe_on_view);
+
+    final TokensActivity context = (TokensActivity) getActivity();
 
     val config = ConfigStore.get(context);
 

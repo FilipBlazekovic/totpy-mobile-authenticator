@@ -8,27 +8,38 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filipblazekovic.totpy.R;
 import com.filipblazekovic.totpy.activity.TokensActivity;
 import com.filipblazekovic.totpy.model.inout.ExportLocked;
 import com.google.android.material.textfield.TextInputLayout;
+import lombok.val;
 
 public class PasswordInputDialog extends DialogFragment {
 
-  private final ExportLocked exportLocked;
-
-  private PasswordInputDialog(ExportLocked exportLocked) {
-    this.exportLocked = exportLocked;
-  }
+  private ExportLocked exportLocked;
 
   public static PasswordInputDialog newInstance(ExportLocked exportLocked) {
-    return new PasswordInputDialog(exportLocked);
+    val dialog = new PasswordInputDialog();
+    try {
+      val args = new Bundle();
+      args.putString("exportLocked", new ObjectMapper().writeValueAsString(exportLocked));
+      dialog.setArguments(args);
+    } catch (Exception ignored) {}
+    return dialog;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setStyle(STYLE_NO_TITLE, R.style.TotpyDialogTheme);
+    try {
+      exportLocked = new ObjectMapper().readValue(
+          getArguments().getString("exportLocked", null),
+          ExportLocked.class
+      );
+    } catch (Exception ignored) {
+    }
     setShowsDialog(true);
   }
 

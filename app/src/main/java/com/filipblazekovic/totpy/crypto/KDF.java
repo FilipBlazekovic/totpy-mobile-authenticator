@@ -13,7 +13,7 @@ import lombok.val;
 public final class KDF {
 
   private static final String KEY_ALGORITHM = "AES";
-  private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA256";
+  private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA512";
   private static final String HKDF_ALGORITHM = "HmacSHA512";
 
   private static final int SALT_LENGTH = 32;
@@ -48,8 +48,8 @@ public final class KDF {
     );
   }
 
-  // Use ephemoral public key here (on both sides of ECDH),
-  // the one who's private key was used to encrypt the data
+  // Ephemeral public key used here (on both sides of ECDH),
+  // is the sender's (encryptor's) public key
   @SneakyThrows
   static SecretKey hkdf(PublicKey ephemoralPublicKey, byte[] sharedSecret) {
     return new SecretKeySpec(

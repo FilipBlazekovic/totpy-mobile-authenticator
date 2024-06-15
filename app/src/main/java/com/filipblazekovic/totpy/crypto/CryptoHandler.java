@@ -120,10 +120,6 @@ public final class CryptoHandler {
     return response;
   }
 
-  public static void deleteAuthenticatorKeys() {
-    Keystore.deleteKeyStoreEntry(Keystore.MASTER_KEYS_ALIAS);
-  }
-
   public static boolean authenticatorKeysExist() {
     return Keystore.keyPairExists(Keystore.MASTER_KEYS_ALIAS);
   }

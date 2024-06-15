@@ -54,7 +54,7 @@ public final class DataHandler {
     executor.execute(() -> {
       val deviceSecurityInfo = CryptoHandler.getDeviceSecurityInfo(context);
       handler.post(() -> SecurityDetailsDialog
-          .newInstance(context, deviceSecurityInfo)
+          .newInstance(deviceSecurityInfo)
           .show(((TokensActivity) context).getSupportFragmentManager(), Common.DIALOG_LABEL));
     });
   }
@@ -279,7 +279,7 @@ public final class DataHandler {
     executor.execute(() -> {
       val publicKey = CryptoHandler.getExportLockingPublicKey();
       handler.post(() -> PublicKeyDialog
-          .newInstance(context, publicKey)
+          .newInstance(publicKey)
           .show(((TokensActivity) context).getSupportFragmentManager(), Common.DIALOG_LABEL));
     });
   }

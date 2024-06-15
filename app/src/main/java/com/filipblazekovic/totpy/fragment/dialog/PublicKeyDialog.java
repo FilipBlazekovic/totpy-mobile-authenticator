@@ -17,34 +17,37 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filipblazekovic.totpy.R;
+import com.filipblazekovic.totpy.activity.TokensActivity;
 import com.filipblazekovic.totpy.model.inout.ExportLockingPublicKey;
 import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.DataHandler;
 import com.filipblazekovic.totpy.utils.QRCode;
 import java.nio.charset.StandardCharsets;
+import lombok.val;
 
 public class PublicKeyDialog extends DialogFragment {
 
-  private final Context context;
   private String publicKey;
 
-  private PublicKeyDialog(Context context, ExportLockingPublicKey exportLockingPublicKey) {
-    this.context = context;
+  public static PublicKeyDialog newInstance(ExportLockingPublicKey exportLockingPublicKey) {
+    val dialog = new PublicKeyDialog();
     try {
-      this.publicKey = new ObjectMapper().writeValueAsString(exportLockingPublicKey);
+      val args = new Bundle();
+      args.putString("publicKey", new ObjectMapper().writeValueAsString(exportLockingPublicKey));
+      dialog.setArguments(args);
     } catch (Exception ignored) {
-      publicKey = "";
     }
-  }
-
-  public static PublicKeyDialog newInstance(Context context, ExportLockingPublicKey exportLockingPublicKey) {
-    return new PublicKeyDialog(context, exportLockingPublicKey);
+    return dialog;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setStyle(STYLE_NO_TITLE, R.style.TotpyDialogTheme);
+    val arguments = getArguments();
+    if (arguments != null) {
+      publicKey = arguments.getString("publicKey", null);
+    }
     setShowsDialog(true);
   }
 
@@ -56,6 +59,8 @@ public class PublicKeyDialog extends DialogFragment {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+
+    final TokensActivity context = (TokensActivity) getActivity();
 
     try {
       final ImageView imageViewQrCode = view.findViewById(R.id.dialog_show_public_key_qr_code_image);

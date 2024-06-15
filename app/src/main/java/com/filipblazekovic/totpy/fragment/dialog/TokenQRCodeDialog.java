@@ -9,28 +9,39 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filipblazekovic.totpy.R;
 import com.filipblazekovic.totpy.model.internal.Token;
 import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.OTPAuth;
 import com.filipblazekovic.totpy.utils.QRCode;
+import lombok.val;
 
 public class TokenQRCodeDialog extends DialogFragment {
 
-  private final Token token;
-
-  private TokenQRCodeDialog(Token token) {
-    this.token = token;
-  }
+  private Token token;
 
   public static TokenQRCodeDialog newInstance(Token token) {
-    return new TokenQRCodeDialog(token);
+    val dialog = new TokenQRCodeDialog();
+    try {
+      val args = new Bundle();
+      args.putString("token", new ObjectMapper().writeValueAsString(token));
+      dialog.setArguments(args);
+    } catch (Exception ignored) {}
+    return dialog;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setStyle(STYLE_NO_TITLE, R.style.TotpyDialogTheme);
+    try {
+        token = new ObjectMapper().readValue(
+            getArguments().getString("token", null),
+            Token.class
+        );
+    } catch (Exception ignored) {
+    }
     setShowsDialog(true);
   }
 
