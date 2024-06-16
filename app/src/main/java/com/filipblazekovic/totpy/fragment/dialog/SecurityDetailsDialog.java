@@ -1,6 +1,7 @@
 package com.filipblazekovic.totpy.fragment.dialog;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.filipblazekovic.totpy.R;
 import com.filipblazekovic.totpy.activity.TokensActivity;
 import com.filipblazekovic.totpy.model.internal.DeviceSecurityInfo;
 import com.filipblazekovic.totpy.model.shared.AsymmetricKeyAlgorithm;
+import com.filipblazekovic.totpy.utils.Common;
 import com.filipblazekovic.totpy.utils.ConfigStore;
 import java.time.format.DateTimeFormatter;
 import lombok.val;

@@ -60,9 +60,6 @@ public final class RSA {
   @Synchronized
   static String encrypt(PublicKey publicKey, byte[] plaintext) {
     val cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM);
-//  OAEPParameterSpec is required for RSA encryption with OAEP padding
-//  (when used for keys in AndroidKeyStore) due to the bug described at:
-//  https://issuetracker.google.com/issues/37075898
     cipher.init(
         Cipher.ENCRYPT_MODE,
         publicKey,
@@ -82,7 +79,16 @@ public final class RSA {
   @Synchronized
   static byte[] decrypt(PrivateKey privateKey, String ciphertext) {
     val cipher = Cipher.getInstance(ENCRYPTION_ALGORITHM);
-    cipher.init(Cipher.DECRYPT_MODE, privateKey);
+    cipher.init(
+        Cipher.DECRYPT_MODE,
+        privateKey,
+        new OAEPParameterSpec(
+            "SHA-256",
+            "MGF1",
+            MGF1ParameterSpec.SHA1,
+            PSource.PSpecified.DEFAULT
+        )
+    );
     return cipher.doFinal(
         Base64.getDecoder().decode(ciphertext)
     );

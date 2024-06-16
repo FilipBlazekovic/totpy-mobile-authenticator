@@ -1,15 +1,19 @@
 package com.filipblazekovic.totpy.model.internal;
 
 import com.filipblazekovic.totpy.model.shared.AsymmetricKeyAlgorithm;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DeviceSecurityInfo {
 
-  Protection keyProtection;
+  private Protection keyProtection;
 
-  AsymmetricKeyAlgorithm keyAlgorithm;
+  private AsymmetricKeyAlgorithm keyAlgorithm;
 
-  boolean deviceRooted;
+  private boolean deviceRooted;
 
 }
